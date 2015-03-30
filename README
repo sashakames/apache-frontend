@@ -1,0 +1,21 @@
+1. Ensure you have apache 2.2.
+2. Ensure you have mod_ssl, mod_wsgi, flask
+2a. For flask, I did yum install python-setuptools followed by easy_install flask
+3. Execute copyfiles.sh. This does not overwrite any existing files. 
+4. Copy your web container certificate and key to /etc/certs as hostcert.pem and hostkey.pem.
+5. Copy your CA chain-file to /etc/certs as cachain.pem
+6. Stop esg-node and backup existing /usr/local/tomcat/conf/server.xml. Ensure tomcat processes are fully absent.
+7. Ensure you don't have httpd running. 
+8. Copy the replacement server.xml present in the local usr/local/tomcat/conf directory to /usr/local/tomcat/conf.
+9. Ensure that the line below is present in the /etc/pam_pgsql.conf and that it lists your node's fqdn
+auth_query=select password from esgf_security.user where username = %u and openid like '%%yournodeFQDNhere%%
+10. esg-node start
+11. /etc/init.d/esgf-httpd start
+
+Expected behavior:
+1. http://yournodename should get auto-redirected to http://yournodename/esgf-web-fe
+2. http://yournodename/api/demo should display a flask 'hello world' page
+
+
+
+
