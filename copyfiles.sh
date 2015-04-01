@@ -63,7 +63,6 @@ mkdir -p /root/flaskdemo/demo
 cp wsgi/demo/* /root/flaskdemo/demo
 chown -R apache:apache /root/flaskdemo/demo
 cp etc/certs/esgf-ca-bundle.crt /etc/certs/
-rm -f usr/local/tomcat/conf/server.xml
 rm -f usr/local/tomcat/conf/1
 rm -f usr/local/tomcat/conf/2
 rm -f usr/local/tomcat/conf/3
