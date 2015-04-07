@@ -92,7 +92,7 @@ if grep -w 'release 5' /etc/redhat-release >/dev/null; then
 	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd;
 fi
 
-bash setup_python.sh
+bash setup_python.sh "$esgfpython" "$esgfpip";
 cp etc/init.d/esgf-httpd /etc/init.d/
 cp etc/httpd/conf/esgf-httpd.conf /etc/httpd/conf/
 #cp usr/local/tomcat/conf/server.xml /usr/local/tomcat/conf/
