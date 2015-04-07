@@ -90,6 +90,8 @@ if grep -w 'release 5' /etc/redhat-release >/dev/null; then
 	#this is a C5/RHEL5 machine. Adjust httpd conf
 	echo "Adjusted httpd conf for C5/RHEL5";
 	sed "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd.tmpl >etc/init.d/esgf-httpd;
+	else
+	cp etc/init.d/esgf-httpd.tmpl etc/init.d/esgf-httpd;
 fi
 
 bash setup_python.sh "$esgfpython" "$esgfpip";
