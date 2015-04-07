@@ -3,4 +3,5 @@ usr/local/tomcat/conf/2
 usr/local/tomcat/conf/3
 usr/local/tomcat/server.xml
 etc/httpd/conf/esgf-httpd.conf
+etc/init.d/esgf-httpd
 

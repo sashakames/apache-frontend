@@ -89,7 +89,7 @@ sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" etc/httpd/conf/e
 if grep -w 'release 5' /etc/redhat-release >/dev/null; then
 	#this is a C5/RHEL5 machine. Adjust httpd conf
 	echo "Adjusted httpd conf for C5/RHEL5";
-	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd;
+	sed "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd.tmpl >etc/init.d/esgf-httpd;
 fi
 
 bash setup_python.sh "$esgfpython" "$esgfpip";
@@ -105,3 +105,4 @@ rm -f usr/local/tomcat/conf/1
 rm -f usr/local/tomcat/conf/2
 rm -f usr/local/tomcat/conf/3
 rm -f etc/httpd/conf/esgf-httpd.conf
+rm -f etc/init.d/esgf-httpd
