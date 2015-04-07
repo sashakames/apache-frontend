@@ -55,10 +55,10 @@ sed "s/\(.*\)$quotedtmpkeyalias\(.*\)/\1$quotedkeyalias\2/" usr/local/tomcat/con
 sed "s/\(.*\)$quotedtmpkeypass\(.*\)/\1$quotedkeypass\2/" usr/local/tomcat/conf/3 >usr/local/tomcat/conf/server.xml;
 
 sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" etc/httpd/conf/esgf-httpd.conf.tmpl >etc/httpd/conf/esgf-httpd.conf;
-if grew -w 'release 5' /etc/redhat-release >/dev/null; then
+if grep -w 'release 5' /etc/redhat-release >/dev/null; then
 	#this is a C5/RHEL5 machine. Adjust httpd conf
 	echo "Adjusted httpd conf for C5/RHEL5";
-	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/httpd/conf/esgf-httpd.conf;
+	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd;
 fi
 
 cp etc/init.d/esgf-httpd /etc/init.d/
