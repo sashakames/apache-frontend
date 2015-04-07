@@ -47,13 +47,19 @@ quotedservername=`echo "$servername" | sed 's/[./*?|]/\\\\&/g'`;
 quotedtrustpass=`echo "truststorePass=\"$truststorepass\""|sed 's/[./*?|"]/\\\\&/g'`;
 quotedkeyalias=`echo "keyAlias=\"$keyalias\""|sed 's/[./*?|"]/\\\\&/g'`;
 quotedkeypass=`echo "keystorePass=\"$keystorepass\""|sed 's/[./*?|"]/\\\\&/g'`;
-
+quotedrunfile=`echo "/var/run/httpd/httpd.pid"|sed 's/[./*?|"]/\\\\&/g'`
+quotedc5runfile=`echo "/var/run/httpd.pid"|sed 's/[./*?|"]/\\\\&/g'`
 sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" usr/local/tomcat/conf/server.tmpl >usr/local/tomcat/conf/1;
 sed "s/\(.*\)$quotedtmptrustpass\(.*\)/\1$quotedtrustpass\2/" usr/local/tomcat/conf/1 >usr/local/tomcat/conf/2;
 sed "s/\(.*\)$quotedtmpkeyalias\(.*\)/\1$quotedkeyalias\2/" usr/local/tomcat/conf/2 >usr/local/tomcat/conf/3;
 sed "s/\(.*\)$quotedtmpkeypass\(.*\)/\1$quotedkeypass\2/" usr/local/tomcat/conf/3 >usr/local/tomcat/conf/server.xml;
 
 sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" etc/httpd/conf/esgf-httpd.conf.tmpl >etc/httpd/conf/esgf-httpd.conf;
+if grew -w 'release 5' /etc/redhat-release >/dev/null; then
+	#this is a C5/RHEL5 machine. Adjust httpd conf
+	echo "Adjusted httpd conf for C5/RHEL5";
+	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/httpd/conf/esgf-httpd.conf;
+fi
 
 cp etc/init.d/esgf-httpd /etc/init.d/
 cp etc/httpd/conf/esgf-httpd.conf /etc/httpd/conf/
