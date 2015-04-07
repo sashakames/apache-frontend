@@ -10,18 +10,16 @@ onfail(){
 	exit -1;
 }
 write_path_to_httpdconf(){
-	PATHADDN=`dirname $PYTHON`;
-	nPATH="$PATHADDN:$PATH"
-	echo "path=~$nPATH~";
-	echo "LD_LIBRARY_PATH=~$LD_LIBRARY_PATH~";
+	nPATH="/opt/esgf/virtual/python/bin:$PATH"
+	#echo "path=~$nPATH~";
+	#echo "LD_LIBRARY_PATH=~$LD_LIBRARY_PATH~";
 	quotednpath=`echo "$nPATH"|sed 's/[./*?|"]/\\\\&/g'`
 	quotedldpath=`echo "$LD_LIBRARY_PATH"|sed 's/[./*?|"]/\\\\&/g'`
 	quotedwsgipath=`echo "/opt/esgf/virtual/python/lib/python2.7/site-packages/mod_wsgi/server/mod_wsgi-py27.so"|sed 's/[./*?|"]/\\\\&/g'`
 	cd $ORGDIR;
-    sed -i "s/\(.*\)PATH=placeholderpath\(.*\)/\1PATH=$quotednpath\2/" etc/init.d/esgf-httpd;
-    sed -i "s/\(.*\)LD_LIBRARY_PATH=placeholderldval\(.*\)/\1LD_LIBRARY_PATH=$quotednpath\2/" etc/init.d/esgf-httpd;
-    sed -i "s/\(.*\)LD_LIBRARY_PATH=placeholderldval\(.*\)/\1LD_LIBRARY_PATH=$LD_LIBRARY_PATH\2/" etc/init.d/esgf-httpd;
-    sed -i "s/\(.*\)LoadModule wsgi_module placeholder_so\(.*\)/\1LoadModule wsgi_module $quotedwsgipath\2/" etc/httpd/conf/esgf-httpd.conf;
+	sed -i "s/\(.*\)PATH=placeholderpath\(.*\)/\1PATH=$quotednpath\2/" etc/init.d/esgf-httpd;
+	sed -i "s/\(.*\)LD_LIBRARY_PATH=placeholderldval\(.*\)/\1LD_LIBRARY_PATH=$quotedldpath\2/" etc/init.d/esgf-httpd;
+	sed -i "s/\(.*\)LoadModule wsgi_module placeholder_so\(.*\)/\1LoadModule wsgi_module $quotedwsgipath\2/" etc/httpd/conf/esgf-httpd.conf;
 }
 
 custominstall_pip(){
