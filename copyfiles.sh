@@ -32,6 +32,37 @@ while(true); do
 		break;
 	fi
 done
+
+while(true); do
+	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python-2.7)\n \
+	Enter NA if you do not know or it does not exist";
+	read esgfpython
+	if [ "$esgfpython" = "NA" ]; then
+		break;
+	fi
+	
+	if [ -x $esgfpython ]; then
+		break;
+	else
+		echo "Specified python binary $esgfpython not found";
+	fi
+done
+
+while(true); do
+	echo -e "Full path to ESGF pip (eg: /usr/local/uvcdat/1.5.0/bin/pip)\n \
+	Enter NA if you do not know or it does not exist";
+	read esgfpip
+	if [ "$esgfpip" = "NA" ]; then
+		break;
+	fi
+	
+	if [ -x $esgfpip ]; then
+		break;
+	else
+		echo "Specified pip binary $esgfpip not found";
+	fi
+done
+
 tmpservername='placeholder.fqdn'
 echo "Entered values:-";
 echo -e "servername=$servername\ntruststorepass=$truststorepass\nkeyalias=$keyalias\nkeystorepass=$keystorepass";
@@ -61,16 +92,16 @@ if grep -w 'release 5' /etc/redhat-release >/dev/null; then
 	sed -i "s/\(.*\)$quotedrunfile\(.*\)/\1$quotedc5runfile\2/" etc/init.d/esgf-httpd;
 fi
 
+bash setup_python.sh
 cp etc/init.d/esgf-httpd /etc/init.d/
 cp etc/httpd/conf/esgf-httpd.conf /etc/httpd/conf/
 #cp usr/local/tomcat/conf/server.xml /usr/local/tomcat/conf/
 mkdir -p /etc/certs
-mkdir -p /root/flaskdemo/demo
-cp wsgi/demo/* /root/flaskdemo/demo
-chown -R apache:apache /root/flaskdemo/demo
+mkdir -p /opt/esgf/flaskdemo/demo
+cp wsgi/demo/* /opt/esgf/flaskdemo/demo
+chown -R apache:apache /opt/esgf/flaskdemo/demo
 cp etc/certs/esgf-ca-bundle.crt /etc/certs/
 rm -f usr/local/tomcat/conf/1
 rm -f usr/local/tomcat/conf/2
 rm -f usr/local/tomcat/conf/3
 rm -f etc/httpd/conf/esgf-httpd.conf
-
