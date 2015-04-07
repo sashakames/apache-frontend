@@ -34,7 +34,7 @@ while(true); do
 done
 
 while(true); do
-	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python-2.7)\n \
+	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python2.7)\n \
 	Enter NA if you do not know or it does not exist";
 	read esgfpython
 	if [ "$esgfpython" = "NA" ]; then
