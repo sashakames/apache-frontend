@@ -74,7 +74,7 @@ LoadModule suexec_module modules/mod_suexec.so
 LoadModule disk_cache_module modules/mod_disk_cache.so
 LoadModule cgi_module modules/mod_cgi.so
 LoadModule version_module modules/mod_version.so
-LoadModule wsgi_module modules/mod_wsgi.so
+LoadModule wsgi_module placeholder_so
 User apache
 Group apache
 ServerAdmin root@localhost
@@ -145,7 +145,7 @@ SSLMutex default
 SSLRandomSeed startup file:/dev/urandom  256
 SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
-WSGISocketPrefix /root/flaskdemo/demo
+WSGISocketPrefix /opt/esgf/flaskdemo/demo
 NameVirtualHost *:80
 <VirtualHost *:80>
 	RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
@@ -167,8 +167,8 @@ NameVirtualHost *:80
 	ProxyPass /las	ajp://localhost:8223/las
 	ProxyPassReverse /las	ajp://localhost:8223/las
 	WSGIDaemonProcess demo user=apache group=apache threads=5
-	WSGIScriptAlias /api/demo /root/flaskdemo/demo/demo.wsgi
-	<Directory /root/flaskdemo/demo>
+	WSGIScriptAlias /api/demo /opt/esgf/flaskdemo/demo/demo.wsgi
+	<Directory /opt/esgf/flaskdemo/demo>
 		WSGIProcessGroup demo
 		WSGIApplicationGroup %{GLOBAL}
 		Order allow,deny
