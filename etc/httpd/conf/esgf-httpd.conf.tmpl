@@ -151,7 +151,7 @@ NameVirtualHost *:80
 	RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
  	SSLProxyEngine On
 	ProxyPassMatch  ^/solr(.*)$     http://localhost:8983/solr$1
-	ProxyPassReverse        /solr   http://localhost:8983/solr/
+	ProxyPassReverse        /solr   http://localhost:8983/solr
 	ProxyPass /esgf-web-fe	ajp://localhost:8223/esgf-web-fe
 	ProxyPassReverse /esgf-web-fe	ajp://localhost:8223/esgf-web-fe
 	ProxyPass /esgf-idp	http://localhost:8080/esgf-idp
@@ -198,7 +198,7 @@ NameVirtualHost *:443
 
 	RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
 	ProxyPassMatch  ^/solr(.*)$     http://localhost:8983/solr$1
-	ProxyPassReverse        /solr   http://localhost:8983/solr/
+	ProxyPassReverse        /solr   http://localhost:8983/solr
 	ProxyPass 	/esg-orp	ajp://localhost:8223/esg-orp
 	ProxyPassReverse /esg-orp	ajp://localhost:8223/esg-orp
 	ProxyPass /esgf-web-fe	ajp://localhost:8223/esgf-web-fe
