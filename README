@@ -1,5 +1,5 @@
 1. Ensure you have apache 2.2.
-2. Ensure you have mod_ssl, http-devel 
+2. Ensure you have mod_ssl, httpd-devel 
 3. Execute copyfiles.sh. This does not overwrite any existing files. 
 4. Copy your web container certificate and key to /etc/certs as hostcert.pem and hostkey.pem.
 5. Copy your CA chain-file to /etc/certs as cachain.pem
