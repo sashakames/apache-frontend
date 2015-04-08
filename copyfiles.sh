@@ -33,35 +33,37 @@ while(true); do
 	fi
 done
 
-while(true); do
-	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python2.7)\n \
-	Enter NA if you do not know or it does not exist";
-	read esgfpython
-	if [ "$esgfpython" = "NA" ]; then
-		break;
-	fi
-	
-	if [ -x $esgfpython ]; then
-		break;
-	else
-		echo "Specified python binary $esgfpython not found";
-	fi
-done
+#while(true); do
+#	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python2.7)\n \
+#	Enter NA if you do not know or it does not exist";
+#	read esgfpython
+#	if [ "$esgfpython" = "NA" ]; then
+#		break;
+#	fi
+#	
+#	if [ -x $esgfpython ]; then
+#		break;
+#	else
+#		echo "Specified python binary $esgfpython not found";
+#	fi
+#done
 
-while(true); do
-	echo -e "Full path to ESGF pip (eg: /usr/local/uvcdat/1.5.0/bin/pip)\n \
-	Enter NA if you do not know or it does not exist";
-	read esgfpip
-	if [ "$esgfpip" = "NA" ]; then
-		break;
-	fi
-	
-	if [ -x $esgfpip ]; then
-		break;
-	else
-		echo "Specified pip binary $esgfpip not found";
-	fi
-done
+#while(true); do
+#	echo -e "Full path to ESGF pip (eg: /usr/local/uvcdat/1.5.0/bin/pip)\n \
+#	Enter NA if you do not know or it does not exist";
+#	read esgfpip
+#	if [ "$esgfpip" = "NA" ]; then
+#		break;
+#	fi
+#	
+#	if [ -x $esgfpip ]; then
+#		break;
+#	else
+#		echo "Specified pip binary $esgfpip not found";
+#	fi
+#done
+esgfpip='NA'
+esgfpython='NA'
 
 tmpservername='placeholder.fqdn'
 echo "Entered values:-";
