@@ -26,6 +26,7 @@ custominstall_pip(){
 	echo "$1";
 	mkdir -p /tmp/tempbuildDIR;
 	cd /tmp/tempbuildDIR;
+	export LD_LIBRARY_PATH=/opt/esgf/real/lib:$LD_LIBRARY_PATH
 	wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py;
 	$PYTHON ez_setup.py --insecure
 	wget --no-check-certificate https://pypi.python.org/packages/source/p/pip/pip-6.1.1.tar.gz
@@ -61,7 +62,9 @@ if [ ! -e $ESGFPIP ]; then
 	PIP=$ESGFPIP;
 	LOCAL_LD=`dirname $PYTHON`/../lib;
 	LL=`echo $LOCAL_LD|sed 's/bin\/\.\.\///g'`;
-	export LD_LIBRARY_PATH=$LL:
+	if [ "$LD_LIBRARY_PATH" = "" ]; then
+		export LD_LIBRARY_PATH=$LL:
+	fi
 fi 
 $PIP install virtualenv
 mkdir -p /opt/esgf/virtual;
