@@ -26,6 +26,7 @@ custominstall_pip(){
 	echo "$1";
 	mkdir -p /tmp/tempbuildDIR;
 	cd /tmp/tempbuildDIR;
+	rm -rf /root/.cache/pip;
 	export LD_LIBRARY_PATH=/opt/esgf/real/lib:$LD_LIBRARY_PATH
 	wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py;
 	$PYTHON ez_setup.py --insecure
