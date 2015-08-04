@@ -16,54 +16,25 @@ if [ "$servername" != "$HOSTNAME" ]; then
 		exit -1;
 	fi
 fi
-echo "What is the truststore password? (default:changeit)";
-read truststorepass;
-if [ "$truststorepass" == "" ]; then
-	truststorepass="changeit";
-fi
-echo "What is the key alias? (default:my_esgf_node)";
-read keyalias;
-if [ "$keyalias" == "" ]; then
-	keyalias="my_esgf_node";
-fi
-keystorepass="";
-while(true); do
-	echo "What is the keystore password?";
-	read keystorepass;
-	if [ "$keystorepass" != "" ]; then
-		break;
-	fi
-done
-
+#echo "What is the truststore password? (default:changeit)";
+#read truststorepass;
+#if [ "$truststorepass" == "" ]; then
+#	truststorepass="changeit";
+#fi
+#echo "What is the key alias? (default:my_esgf_node)";
+#read keyalias;
+#if [ "$keyalias" == "" ]; then
+#	keyalias="my_esgf_node";
+#fi
+#keystorepass="";
 #while(true); do
-#	echo -e "Full path to ESGF Python (eg: /usr/local/uvcdat/1.5.0/bin/python2.7)\n \
-#	Enter NA if you do not know or it does not exist";
-#	read esgfpython
-#	if [ "$esgfpython" = "NA" ]; then
+#	echo "What is the keystore password?";
+#	read keystorepass;
+#	if [ "$keystorepass" != "" ]; then
 #		break;
-#	fi
-#	
-#	if [ -x $esgfpython ]; then
-#		break;
-#	else
-#		echo "Specified python binary $esgfpython not found";
 #	fi
 #done
 
-#while(true); do
-#	echo -e "Full path to ESGF pip (eg: /usr/local/uvcdat/1.5.0/bin/pip)\n \
-#	Enter NA if you do not know or it does not exist";
-#	read esgfpip
-#	if [ "$esgfpip" = "NA" ]; then
-#		break;
-#	fi
-#	
-#	if [ -x $esgfpip ]; then
-#		break;
-#	else
-#		echo "Specified pip binary $esgfpip not found";
-#	fi
-#done
 esgfpip='NA'
 esgfpython='NA'
 
