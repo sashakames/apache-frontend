@@ -67,6 +67,7 @@ if [ ! -e $ESGFPIP ]; then
 	fi
 fi 
 $PIP install virtualenv
+env >tempbuildDIR/env
 mkdir -p /opt/esgf/virtual;
 cd /opt/esgf/virtual;
 VIRTENV=`dirname $PYTHON`/virtualenv;
