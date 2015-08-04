@@ -42,12 +42,12 @@ custominstall_python(){
 	wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz;
 	tar -xf Python-2.7.9.tgz;
 	cd Python-2.7.9;
-	./configure --prefix=/opt/esgf --enable-shared;
+	./configure --prefix=/opt/esgf/python --enable-shared;
 	make 2>&1 |tee make.out || onfail "make on python failed";
 	make install || onfail "make install on python failed";
 	cd $ORGDIR && rm -rf tempbuildDIR;
-	PYTHON=/opt/esgf/bin/python2.7
-	export LD_LIBRARY_PATH=/opt/esgf/lib:$LD_LIBRARY_PATH
+	PYTHON=/opt/esgf/python/bin/python2.7
+	export LD_LIBRARY_PATH=/opt/esgf/python/lib:$LD_LIBRARY_PATH
 }
 
 if [ ! -e $ESGFPYTHON ]; then
