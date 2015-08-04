@@ -45,7 +45,9 @@ custominstall_python(){
 	./configure --prefix=/opt/esgf/python --enable-shared;
 	make 2>&1 |tee make.out || onfail "make on python failed";
 	make install || onfail "make install on python failed";
+	echo "ORGDIR was $ORGDIR";
 	cd $ORGDIR && rm -rf tempbuildDIR;
+	sleep 3;
 	PYTHON=/opt/esgf/python/bin/python2.7
 	export LD_LIBRARY_PATH=/opt/esgf/python/lib:$LD_LIBRARY_PATH
 }
@@ -67,7 +69,7 @@ if [ ! -e $ESGFPIP ]; then
 	fi
 fi 
 $PIP install virtualenv
-env >tempbuildDIR/env
+env >apachef.env
 mkdir -p /opt/esgf/virtual;
 cd /opt/esgf/virtual;
 VIRTENV=`dirname $PYTHON`/virtualenv;
