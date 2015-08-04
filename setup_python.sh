@@ -3,7 +3,7 @@
 ESGFPYTHON="$1";
 ESGFPIP="$2";
 ORGDIR=`pwd`;
-rm -rf /tmp/tempbuildDIR 2>/dev/null;
+rm -rf tempbuildDIR 2>/dev/null;
 
 onfail(){
 	echo "$1";
@@ -24,8 +24,8 @@ write_path_to_httpdconf(){
 
 custominstall_pip(){
 	echo "$1";
-	mkdir -p /tmp/tempbuildDIR;
-	cd /tmp/tempbuildDIR;
+	mkdir -p tempbuildDIR;
+	cd tempbuildDIR;
 	rm -rf /root/.cache/pip;
 	export LD_LIBRARY_PATH=/opt/esgf/lib:$LD_LIBRARY_PATH
 	wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py;
@@ -36,15 +36,15 @@ custominstall_pip(){
 
 custominstall_python(){
 	echo "$1";
-	mkdir -p /tmp/tempbuildDIR;
-	cd /tmp/tempbuildDIR;
+	mkdir -p tempbuildDIR;
+	cd tempbuildDIR;
 	wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz;
 	tar -xf Python-2.7.9.tgz;
 	cd Python-2.7.9;
 	./configure --prefix=/opt/esgf --enable-shared;
 	make 2>&1 |tee make.out || onfail "make on python failed";
 	make install || onfail "make install on python failed";
-	rm -rf /tmp/tempbuildDIR;
+	cd $ORGDIR && rm -rf tempbuildDIR;
 	PYTHON=/opt/esgf/bin/python2.7
 	export LD_LIBRARY_PATH=/opt/esgf/lib:$LD_LIBRARY_PATH
 }
