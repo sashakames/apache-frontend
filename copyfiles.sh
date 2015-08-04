@@ -78,5 +78,6 @@ mkdir -p /opt/esgf/flaskdemo/demo
 cp wsgi/demo/* /opt/esgf/flaskdemo/demo
 chown -R apache:apache /opt/esgf/flaskdemo/demo
 cp etc/certs/esgf-ca-bundle.crt /etc/certs/
+cp etc/certs/*.pem /etc/certs/
 rm -f etc/httpd/conf/esgf-httpd.conf
 rm -f etc/init.d/esgf-httpd
