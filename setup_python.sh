@@ -29,8 +29,9 @@ custominstall_pip(){
 	rm -rf /root/.cache/pip;
 	export LD_LIBRARY_PATH=/opt/esgf/lib:$LD_LIBRARY_PATH
 	wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py;
+	EZ=`dirname $PYTHON`/easy_install;
 	$PYTHON ez_setup.py --insecure
-	$PYTHON easyinstall pip
+	$EZ pip
 	PIP=`dirname $PYTHON`/pip
 }
 
