@@ -244,13 +244,13 @@ NameVirtualHost *:8000
 
 	WSGIScriptAlias / /usr/local/cog/cog_install/apache/django.wsgi
 	Alias /static/ /usr/local/cog/cog_install/static/
-	<Directory / usr/local/cog/cog_install/static>
+	<Directory /usr/local/cog/cog_install/static>
 		Options -Indexes
 		Order deny,allow
 		Allow from all
 		AllowOverride None
 	</Directory>
-	<Directory / usr/local/cog/cog_install/cog/static>
+	<Directory /usr/local/cog/cog_install/cog/static>
 		Options -Indexes
 		Order deny,allow
 		Allow from all
