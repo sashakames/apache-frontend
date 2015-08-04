@@ -71,6 +71,7 @@
                connectionTimeout="20000"
                proxyPort="80"
                proxyName="placeholder.fqdn"
+               server='X'
                redirectPort="8443" />
     	
     <!-- A "Connector" using the shared thread pool-->
@@ -92,6 +93,7 @@
                clientAuth="want" sslProtocol="TLS"
                proxyPort="443"
                proxyName="placeholder.fqdn"
+               server='X'
 	       ciphers="TLS_DHE_RSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5,SSL_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA"
 	       truststoreFile="/esg/config/tomcat/esg-truststore.ts" truststorePass="changeit"
                keyAlias="my_esgf_node"

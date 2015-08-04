@@ -1,4 +1,6 @@
 #!/bin/bash
+TOMCATCONFDIR=$1
+tomcatconfdir=${TOMCATCONFDIR:-"/usr/local/tomcat/conf"}
 
 echo "What is the public name of the server? (no protocol part)";
 read servername;
@@ -82,10 +84,10 @@ quotedkeyalias=`echo "keyAlias=\"$keyalias\""|sed 's/[./*?|"]/\\\\&/g'`;
 quotedkeypass=`echo "keystorePass=\"$keystorepass\""|sed 's/[./*?|"]/\\\\&/g'`;
 quotedrunfile=`echo "/var/run/httpd/httpd.pid"|sed 's/[./*?|"]/\\\\&/g'`
 quotedc5runfile=`echo "/var/run/httpd.pid"|sed 's/[./*?|"]/\\\\&/g'`
-sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" usr/local/tomcat/conf/server.tmpl >usr/local/tomcat/conf/1;
-sed "s/\(.*\)$quotedtmptrustpass\(.*\)/\1$quotedtrustpass\2/" usr/local/tomcat/conf/1 >usr/local/tomcat/conf/2;
-sed "s/\(.*\)$quotedtmpkeyalias\(.*\)/\1$quotedkeyalias\2/" usr/local/tomcat/conf/2 >usr/local/tomcat/conf/3;
-sed "s/\(.*\)$quotedtmpkeypass\(.*\)/\1$quotedkeypass\2/" usr/local/tomcat/conf/3 >usr/local/tomcat/conf/server.xml;
+sed -i "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" $tomcatconfdir/server.xml;
+#sed "s/\(.*\)$quotedtmptrustpass\(.*\)/\1$quotedtrustpass\2/" usr/local/tomcat/conf/1 >usr/local/tomcat/conf/2;
+#sed "s/\(.*\)$quotedtmpkeyalias\(.*\)/\1$quotedkeyalias\2/" usr/local/tomcat/conf/2 >usr/local/tomcat/conf/3;
+#sed "s/\(.*\)$quotedtmpkeypass\(.*\)/\1$quotedkeypass\2/" usr/local/tomcat/conf/3 >usr/local/tomcat/conf/server.xml;
 
 sed "s/\(.*\)$quotedtmpservername\(.*\)/\1$quotedservername\2/" etc/httpd/conf/esgf-httpd.conf.tmpl >etc/httpd/conf/esgf-httpd.conf;
 if grep -w 'release 5' /etc/redhat-release >/dev/null; then
@@ -105,8 +107,5 @@ mkdir -p /opt/esgf/flaskdemo/demo
 cp wsgi/demo/* /opt/esgf/flaskdemo/demo
 chown -R apache:apache /opt/esgf/flaskdemo/demo
 cp etc/certs/esgf-ca-bundle.crt /etc/certs/
-rm -f usr/local/tomcat/conf/1
-rm -f usr/local/tomcat/conf/2
-rm -f usr/local/tomcat/conf/3
 rm -f etc/httpd/conf/esgf-httpd.conf
 rm -f etc/init.d/esgf-httpd

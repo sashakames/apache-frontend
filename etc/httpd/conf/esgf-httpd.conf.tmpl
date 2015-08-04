@@ -145,7 +145,7 @@ SSLMutex default
 SSLRandomSeed startup file:/dev/urandom  256
 SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
-WSGISocketPrefix /opt/esgf/flaskdemo/demo
+WSGISocketPrefix run/wsgi
 NameVirtualHost *:80
 <VirtualHost *:80>
 	RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
@@ -224,9 +224,10 @@ NameVirtualHost *:443
     </Location>
 </VirtualHost>
 
-Listen 443
+Listen 8000
 NameVirtualHost *:8000
 <VirtualHost *:8000>
+	ServerName placeholder.fqdn
 	SSLEngine on
     SSLProxyEngine On
 	SSLCipherSuite ALL:!ADH:!EXP56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
@@ -238,9 +239,10 @@ NameVirtualHost *:8000
 	SSLCertificateChainFile /etc/certs/cachain.pem
 	SSLOptions +StdEnvVars +ExportCertData
 
-	WSGIDaemonProcess cog-site user=apache group=apache threads=25
+	WSGIDaemonProcess cog-site python-path=/usr/local/cog/venv/lib/python2.7/site-packages:/usr/local/cog/cog-install user=apache group=apache threads=25
+	WSGIProcessGroup cog-site
+
 	WSGIScriptAlias / /usr/local/cog/cog_install/apache/django.wsgi
-	python-path=/usr/local/cog/venv/lib/python2.7/site-packages:/usr/local/cog/cog-install user/apache group=apache threads=25
 	Alias /static/ /usr/local/cog/cog_install/static/
 	<Directory / usr/local/cog/cog_install/static>
 		Options -Indexes
