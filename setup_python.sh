@@ -27,7 +27,6 @@ custominstall_pip(){
 	mkdir -p tempbuildDIR;
 	cd tempbuildDIR;
 	rm -rf /root/.cache/pip;
-	export LD_LIBRARY_PATH=/opt/esgf/lib:$LD_LIBRARY_PATH
 	wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py;
 	EZ=`dirname $PYTHON`/easy_install;
 	$PYTHON ez_setup.py --insecure
@@ -46,10 +45,9 @@ custominstall_python(){
 	make 2>&1 |tee make.out || onfail "make on python failed";
 	make install || onfail "make install on python failed";
 	echo "ORGDIR was $ORGDIR";
-	cd $ORGDIR && rm -rf tempbuildDIR;
-	sleep 3;
 	PYTHON=/opt/esgf/python/bin/python2.7
 	export LD_LIBRARY_PATH=/opt/esgf/python/lib:$LD_LIBRARY_PATH
+	export CFLAGS=-I/opt/esgf/python/include/python2.7 $CFLAGS
 }
 
 if [ ! -e $ESGFPYTHON ]; then
@@ -69,6 +67,7 @@ if [ ! -e $ESGFPIP ]; then
 	fi
 fi 
 $PIP install virtualenv
+cd $ORGDIR
 env >apachef.env
 mkdir -p /opt/esgf/virtual;
 cd /opt/esgf/virtual;
@@ -77,4 +76,5 @@ $VIRTENV -p $PYTHON python --system-site-packages
 /opt/esgf/python/bin/pip install flask;
 /opt/esgf/python/bin/pip install mod_wsgi;
 write_path_to_httpdconf
+cd $ORGDIR && rm -rf tempbuildDIR
 exit 0
