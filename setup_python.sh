@@ -47,7 +47,7 @@ custominstall_python(){
 	echo "ORGDIR was $ORGDIR";
 	PYTHON=/opt/esgf/python/bin/python2.7
 	export LD_LIBRARY_PATH=/opt/esgf/python/lib:$LD_LIBRARY_PATH
-	export CFLAGS=-I/opt/esgf/python/include/python2.7 $CFLAGS
+	export CFLAGS="-I/opt/esgf/python/include/python2.7 $CFLAGS";
 }
 
 if [ ! -e $ESGFPYTHON ]; then
