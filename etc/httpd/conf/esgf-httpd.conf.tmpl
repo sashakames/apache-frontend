@@ -149,6 +149,17 @@ WSGISocketPrefix run/wsgi
 NameVirtualHost *:80
 <VirtualHost *:80>
 	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
+
+    # redirect all requests from HTTP to HTTPS
+    # EXCEPT for the applications listed below
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteCond %{REQUEST_URI} !^/esg-search(.*)$
+    RewriteCond %{REQUEST_URI} !^/las(.*)$
+    RewriteCond %{REQUEST_URI} !^/solr(.*)$
+    RewriteCond %{REQUEST_URI} !^/thredds(.*)$
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
  	SSLProxyEngine On
 	ProxyPassMatch  ^/solr(.*)$     http://localhost:8983/solr$1
 	ProxyPassReverse        /solr   http://localhost:8983/solr
