@@ -147,6 +147,16 @@ SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
 WSGISocketPrefix run/wsgi
 NameVirtualHost *:80
+<Location /admin>
+	Order deny,allow
+	Deny from All
+	#insert-permitted-ips-here
+</Location>
+<Location /solr/admin>
+	Order deny,allow
+	Deny from All
+	#insert-permitted-ips-here
+</Location>
 <VirtualHost *:80>
 	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
 
