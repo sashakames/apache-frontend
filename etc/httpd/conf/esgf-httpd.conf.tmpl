@@ -185,8 +185,10 @@ NameVirtualHost *:80
 	ProxyPassReverse /thredds	ajp://localhost:8223/thredds
 	#ProxyPass /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
 	#ProxyPassReverse /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
-	#ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
 	#ProxyPass /las	ajp://localhost:8223/las
 	#ProxyPassReverse /las	ajp://localhost:8223/las
 
@@ -226,8 +228,10 @@ NameVirtualHost *:443
 	#ProxyPassReverse /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
 	ProxyPass /thredds	ajp://localhost:8223/thredds
 	ProxyPassReverse /thredds	ajp://localhost:8223/thredds
-	#ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
 	#ProxyPass /las	ajp://localhost:8223/las
 	#ProxyPassReverse /las	ajp://localhost:8223/las
 
