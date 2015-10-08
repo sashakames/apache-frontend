@@ -189,8 +189,8 @@ NameVirtualHost *:80
 	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
 	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
 	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
-	#ProxyPass /las	ajp://localhost:8223/las
-	#ProxyPassReverse /las	ajp://localhost:8223/las
+	ProxyPass /las	ajp://localhost:8223/las
+	ProxyPassReverse /las	ajp://localhost:8223/las
 
 </VirtualHost>
 
@@ -232,8 +232,8 @@ NameVirtualHost *:443
 	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
 	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
 	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
-	#ProxyPass /las	ajp://localhost:8223/las
-	#ProxyPassReverse /las	ajp://localhost:8223/las
+	ProxyPass /las	ajp://localhost:8223/las
+	ProxyPassReverse /las	ajp://localhost:8223/las
 
 	WSGIDaemonProcess demo user=apache group=apache threads=5
 	WSGIScriptAlias /api/demo /opt/esgf/flaskdemo/demo/demo.wsgi
