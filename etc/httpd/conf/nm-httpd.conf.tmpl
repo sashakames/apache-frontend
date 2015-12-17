@@ -159,7 +159,7 @@ NameVirtualHost *:80
 	#insert-permitted-ips-here
 </Location>
 <VirtualHost *:80>
-	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
+	RedirectMatch ^/$ http://placeholder.fqdn/api/demo
 
     # redirect all requests from HTTP to HTTPS
     # EXCEPT for the applications listed below
@@ -214,7 +214,7 @@ NameVirtualHost *:443
 	SSLCertificateChainFile /etc/certs/cachain.pem
 	SSLOptions +StdEnvVars +ExportCertData
 
-	RedirectMatch ^/$ http://placeholder.fqdn/api/demo
+	RedirectMatch ^/$ https://placeholder.fqdn/api/demo
 
 	WSGIDaemonProcess demo user=apache group=apache threads=5
 	WSGIScriptAlias /api/demo /opt/esgf/flaskdemo/demo/demo.wsgi
