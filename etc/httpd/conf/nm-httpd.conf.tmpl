@@ -159,39 +159,27 @@ NameVirtualHost *:80
 	#insert-permitted-ips-here
 </Location>
 <VirtualHost *:80>
-	RedirectMatch ^/$ https://placeholder.fqdn/api/demo
+    RedirectMatch ^/$ https://placeholder.fqdn/api/demo
 
     # redirect all requests from HTTP to HTTPS
     # EXCEPT for the applications listed below
     RewriteEngine On
     RewriteCond %{HTTPS} off
-    RewriteCond %{REQUEST_URI} !^/esg-search(.*)$
-    RewriteCond %{REQUEST_URI} !^/las(.*)$
-    RewriteCond %{REQUEST_URI} !^/solr(.*)$
-    RewriteCond %{REQUEST_URI} !^/thredds(.*)$
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
- 	SSLProxyEngine On
-	ProxyPassMatch  ^/solr(.*)$     http://localhost:8983/solr$1
-	ProxyPassReverse        /solr   http://localhost:8983/solr
-	#ProxyPass /esgf-web-fe	ajp://localhost:8223/esgf-web-fe
-	#ProxyPassReverse /esgf-web-fe	ajp://localhost:8223/esgf-web-fe
-	ProxyPass /esgf-idp	http://localhost:8080/esgf-idp
-	ProxyPassReverse /esgf-idp	http://localhost:8080/esgf-idp
-	ProxyPass /esg-orp	ajp://localhost:8223/esg-orp
-	ProxyPassReverse /esg-orp	ajp://localhost:8223/esg-orp
-	ProxyPass /esg-search	ajp://localhost:8223/esg-search
-	ProxyPassReverse /esg-search	ajp://localhost:8223/esg-search
-	ProxyPass /thredds	ajp://localhost:8223/thredds
-	ProxyPassReverse /thredds	ajp://localhost:8223/thredds
-	#ProxyPass /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
-	#ProxyPassReverse /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
-	ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
-	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
-	ProxyPass /las	ajp://localhost:8223/las
-	ProxyPassReverse /las	ajp://localhost:8223/las
+    SSLProxyEngine On
+
+    WSGIDaemonProcess esgfnm python-path=/opt/esgf/virtual/python/lib/python2.7/site-packages:/usr/local/esgf-nodemgr-doc/code/server user=apache group=apache threads=5
+    WSGIScriptAlias /esgf-nm /usr/local/esgf-nodemgr-doc/code/server/nodemgr/apache/django.wsgi
+            <Directory /usr/local/esgf-nodemgr-doc/code/server/nodemgr/apache>
+                Order allow,deny
+                Allow from all
+                AllowOverride None
+        </Directory>
+        <Location /esgf-nm>
+                WSGIProcessGroup esgfnm
+                WSGIApplicationGroup %{GLOBAL}
+                </Location>
 
 </VirtualHost>
 
