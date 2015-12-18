@@ -165,6 +165,7 @@ NameVirtualHost *:80
     # EXCEPT for the applications listed below
     RewriteEngine On
     RewriteCond %{HTTPS} off
+    RewriteCond %{REQUEST_URI} !^/esgf-nm(.*)$
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
     SSLProxyEngine On
