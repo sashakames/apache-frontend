@@ -159,7 +159,7 @@ NameVirtualHost *:80
 	#insert-permitted-ips-here
 </Location>
 <VirtualHost *:80>
-	RedirectMatch ^/$ http://placeholder.fqdn/api/demo
+	RedirectMatch ^/$ https://placeholder.fqdn/api/demo
 
     # redirect all requests from HTTP to HTTPS
     # EXCEPT for the applications listed below
