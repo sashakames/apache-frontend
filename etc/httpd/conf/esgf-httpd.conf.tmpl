@@ -145,8 +145,19 @@ SSLMutex default
 SSLRandomSeed startup file:/dev/urandom  256
 SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
+TraceEnable off
 WSGISocketPrefix run/wsgi
 NameVirtualHost *:80
+<Location /admin>
+	Order deny,allow
+	Deny from All
+	#insert-permitted-ips-here
+</Location>
+<Location /solr/admin>
+	Order deny,allow
+	Deny from All
+	#insert-permitted-ips-here
+</Location>
 <VirtualHost *:80>
 	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
 
@@ -175,10 +186,14 @@ NameVirtualHost *:80
 	ProxyPassReverse /thredds	ajp://localhost:8223/thredds
 	#ProxyPass /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
 	#ProxyPassReverse /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
-	#ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPass /las	ajp://localhost:8223/las
-	#ProxyPassReverse /las	ajp://localhost:8223/las
+	ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPass /las	ajp://localhost:8223/las
+	ProxyPassReverse /las	ajp://localhost:8223/las
+
+	#nm-http rules go here
 
 </VirtualHost>
 
@@ -216,10 +231,12 @@ NameVirtualHost *:443
 	#ProxyPassReverse /esgf-node-manager	ajp://localhost:8223/esgf-node-manager
 	ProxyPass /thredds	ajp://localhost:8223/thredds
 	ProxyPassReverse /thredds	ajp://localhost:8223/thredds
-	#ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
-	#ProxyPass /las	ajp://localhost:8223/las
-	#ProxyPassReverse /las	ajp://localhost:8223/las
+	ProxyPass /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPassReverse /esgf-dashboard	ajp://localhost:8223/esgf-dashboard
+	ProxyPass /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPassReverse /esgf-desktop	ajp://localhost:8223/esgf-desktop
+	ProxyPass /las	ajp://localhost:8223/las
+	ProxyPassReverse /las	ajp://localhost:8223/las
 
 	WSGIDaemonProcess demo user=apache group=apache threads=5
 	WSGIScriptAlias /api/demo /opt/esgf/flaskdemo/demo/demo.wsgi
