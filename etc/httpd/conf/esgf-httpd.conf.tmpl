@@ -256,7 +256,7 @@ NameVirtualHost *:443
         </Location>
 
         WSGIDaemonProcess cog-site python-path=/usr/local/cog/venv/lib/python2.7/site-packages:/usr/local/cog/cog-install user=apache group=apache threads=25
-        WSGIScriptAlias / /usr/local/cog/cog_install/apache/django.wsgi
+        WSGIScriptAlias / /usr/local/cog/cog_install/apache/wsgi.py
         Alias /static/ /usr/local/cog/cog_install/static/
         <Directory /usr/local/cog/cog_install/static>
                 Options -Indexes
