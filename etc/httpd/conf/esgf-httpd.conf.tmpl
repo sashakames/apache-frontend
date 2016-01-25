@@ -146,8 +146,15 @@ SSLRandomSeed startup file:/dev/urandom  256
 SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
 TraceEnable off
+
 WSGISocketPrefix run/wsgi
 NameVirtualHost *:80
+<Location / >
+	<LimitExcept POST GET>
+		Order deny,allow
+		Deny from all
+	</LimitExcept>
+</Location>
 <Location /admin>
 	Order deny,allow
 	Deny from All
