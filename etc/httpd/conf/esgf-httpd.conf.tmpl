@@ -166,7 +166,6 @@ NameVirtualHost *:80
 	#insert-permitted-ips-here
 </Location>
 <VirtualHost *:80>
-	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
 
     # redirect all requests from HTTP to HTTPS
     # EXCEPT for the applications listed below
@@ -229,7 +228,6 @@ NameVirtualHost *:443
 	#add local configuration, if any,  to /etc/httpd/conf/esgf-httpd-locals.conf (without virtualhost directive) and uncomment following line. For http, the file is esgf-httpd-local.conf (locals for https, local for http)
 	#Include /etc/httpd/conf/esgf-httpd-locals.conf
 
-	#RedirectMatch ^/$ http://placeholder.fqdn/esgf-web-fe/
 	ProxyPassMatch  ^/solr(.*)$     http://localhost:8983/solr$1
 	ProxyPassReverse        /solr   http://localhost:8983/solr
 	ProxyPass 	/esg-orp	ajp://localhost:8223/esg-orp
